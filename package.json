@@ -1,0 +1,11 @@
+{
+  "name": "patient-card-app",
+  "version": "0.0.1",
+  "description": "This app is patient card creation tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aspiretocode",
+  "license": "ISC"
+}
