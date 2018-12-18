@@ -29,11 +29,25 @@ module.exports = {
         exclude: /node_modules/
       },
 
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+      {
+        test: /\.styl$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "stylus-loader"
+          }
+        ]
+      }
     ]
   },
   resolve: {
-    extensions: [".ts", ".tsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   plugins: [
     new HtmlWebpackPlugin({
