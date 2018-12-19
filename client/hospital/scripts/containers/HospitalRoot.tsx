@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
-import { PatientCard } from "../components/PatientCard";
+import { PatientCardForm } from "../components/PatientCardForm";
 
 export class HospitalRoot extends React.Component {
   render() {
@@ -9,12 +9,12 @@ export class HospitalRoot extends React.Component {
         <AppBar position="static" color="default">
           <Toolbar>
             <Typography variant="h6" color="inherit">
-              Patient Card Generator
+              Генератор карточки пациента
             </Typography>
           </Toolbar>
         </AppBar>
         <div className="content">
-          <PatientCard />
+          <PatientCardForm />
         </div>
       </React.Fragment>
     );

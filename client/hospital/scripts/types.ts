@@ -17,11 +17,11 @@ export interface Diagnosis {
 export interface ClinicalDiagnosis {}
 
 export interface PatientCard {
-  number: number;
+  number: string;
   receiptDate: Date;
   dischargeDate: Date;
   department: string;
-  roomNumber: number;
+  roomNumber: string;
   attendingDoctor: string;
   transportationType: TransportationType;
   intolerance: string;
@@ -29,14 +29,12 @@ export interface PatientCard {
   gender: Gender;
   phoneNumber: string;
   dateOfBirth: Date;
-  age: number;
+  age: string;
   residence: string;
   job: string;
   disability: string;
-  emergencyDelivery: boolean;
-  injuryHours: number;
+  injuryHours: string;
   admissionDiagnosis: string;
-  diagnoses: Diagnosis[];
   clinicalDiagnosisA: string;
   clinicalDiagnosisB: string;
   clinicalDiagnosisC: string;
