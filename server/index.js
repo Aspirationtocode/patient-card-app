@@ -29,11 +29,10 @@ app.post("/hospital-generate", (request, response) => {
     }
   };
   generateDOCX(options).then(buf => {
+    response.send(buf);
     const pathToFile = path.join(__dirname, "outputs/hospital.docx");
     fs.writeFile(pathToFile, buf, err => {
-      response.download(pathToFile, () => {
-        fs.unlink(pathToFile, () => {});
-      });
+      response.download(pathToFile);
     });
   });
 });

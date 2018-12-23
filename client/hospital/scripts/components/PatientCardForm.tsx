@@ -219,7 +219,21 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
       responseType: "blob",
       data
     }).then(response => {
-      download(response.data, "Сгенерированная Карточка пациента");
+      var downloadUrl = window.URL.createObjectURL(response.data, {
+        type: "application/msword"
+      });
+
+      var a = document.createElement("a");
+      a.style.display = "none";
+
+      if (typeof a.download === "undefined") {
+        window.location = downloadUrl;
+      } else {
+        a.href = downloadUrl;
+        a.download = "fileName.docx";
+        document.body.appendChild(a);
+        a.click();
+      }
     });
   };
 
