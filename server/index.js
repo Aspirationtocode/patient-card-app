@@ -22,6 +22,7 @@ app.get("/", (request, response) => {
 });
 
 app.post("/hospital-generate", (request, response) => {
+  response.send("s");
   const options = {
     template: {
       data: request.body,
