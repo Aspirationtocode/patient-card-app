@@ -8,11 +8,13 @@
     "node": "10.x"
   },
   "scripts": {
+    "build-server": "tsc --project tsconfig.server.json",
+    "server:prod": "node build/server/index",
     "server": "ts-node server/index.ts",
     "start": "webpack --watch --mode=development",
     "build": "webpack --mode=production",
     "watch-server": "nodemon -r ts-node/register server/index.ts",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build && npm run build-server"
   },
   "author": "Aspiretocode",
   "license": "ISC",

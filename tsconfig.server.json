@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "jsx": "react",
+    "outDir": "./build",
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "removeComments": true,
+    "allowUnreachableCode": true,
+    "emitDecoratorMetadata": true,
+    "types": ["node"],
+    "lib": ["dom", "es7"]
+  }
+}
