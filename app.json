@@ -1,0 +1,8 @@
+{
+  "name": "Patient card generator",
+  "description": "App that generates patient cards",
+  "repository": "https://github.com/Aspirationtocode/patient-card-app",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}

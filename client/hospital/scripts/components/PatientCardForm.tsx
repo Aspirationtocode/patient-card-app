@@ -1,51 +1,42 @@
 import * as React from "react";
+import * as moment from "moment";
+import "moment/locale/ru";
+import * as download from "downloadjs";
 import { default as axios } from "axios";
-import {
-  TextField,
-  Grid,
-  Button,
-  Select,
-  MenuItem,
-  OutlinedInput
-} from "@material-ui/core";
-import {
-  MuiPickersUtilsProvider,
-  TimePicker,
-  DatePicker
-} from "material-ui-pickers";
+import { TextField, Grid, Button, Select, MenuItem } from "@material-ui/core";
+import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import MomentUtils from "@date-io/moment";
 import { PatientCard, Gender, TransportationType } from "../types";
 
 type PatientCardFormState = PatientCard & { [key: string]: any };
 
+moment.locale("ru");
+
 export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      number: "",
-      receiptDate: new Date(),
-      dischargeDate: new Date(),
-      department: "",
-      roomNumber: "",
-      attendingDoctor: "",
-      transportationType: TransportationType.ARMCHAIR,
-      intolerance: "",
-      fullName: "",
-      gender: Gender.MALE,
-      phoneNumber: "",
-      dateOfBirth: new Date(),
-      age: "",
-      residence: "",
-      job: "",
-      disability: "",
-      injuryHours: "",
-      admissionDiagnosis: "",
-      clinicalDiagnosisA: "",
-      clinicalDiagnosisB: "",
-      clinicalDiagnosisC: "",
-      operations: ""
-    };
-  }
+  state = {
+    number: "",
+    receiptDate: new Date(),
+    dischargeDate: new Date(),
+    department: "",
+    roomNumber: "",
+    attendingDoctor: "",
+    transportationType: TransportationType.ARMCHAIR,
+    intolerance: "",
+    fullName: "",
+    gender: Gender.MALE,
+    phoneNumber: "",
+    dateOfBirth: new Date(),
+    age: "",
+    residence: "",
+    job: "",
+    disability: "",
+    injuryHours: "",
+    admissionDiagnosis: "",
+    clinicalDiagnosisA: "",
+    clinicalDiagnosisB: "",
+    clinicalDiagnosisC: "",
+    operations: ""
+  };
 
   render() {
     const {
@@ -101,7 +92,6 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
           </Grid>
           <Grid item xs={6}>
             <Select
-              variant="outlined"
               fullWidth
               onChange={this.handleTransportationTypeChange}
               value={transportationType}
@@ -129,6 +119,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
           {this.getTextField("age", "Возраст", "number")}
           {this.getTextField("residence", "Постоянное место жительства")}
           {this.getTextField("job", "Место работы, профессия или должность")}
+          {this.getTextField("disability", "Инвалидность")}
           {this.getTextField(
             "injuryHours",
             "Доставлен в стационар после (часов)",
@@ -158,7 +149,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
   private getTextField(
     field: keyof PatientCardFormState,
     label: string,
-    type: string = "string"
+    type: "number" | "text" = "text"
   ) {
     return (
       <Grid item xs={6}>
@@ -217,7 +208,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
   };
 
   private handleGenerate = () => {
-    const body = JSON.stringify(this.state);
+    const data = this.getData();
 
     axios("/hospital-generate", {
       headers: {
@@ -226,14 +217,25 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
       },
       method: "POST",
       responseType: "blob",
-      data: body
+      data
     }).then(response => {
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "file.docx");
-      document.body.appendChild(link);
-      link.click();
+      download(response.data, "Карточка пациента");
     });
   };
+
+  private getData() {
+    const dates = ["receiptDate", "dischargeDate", "dateOfBirth"].reduce(
+      (prev, curr) => {
+        return {
+          ...prev,
+          [curr]: moment(this.state[curr]).format("LL")
+        };
+      },
+      {}
+    );
+    return JSON.stringify({
+      ...this.state,
+      ...dates
+    });
+  }
 }

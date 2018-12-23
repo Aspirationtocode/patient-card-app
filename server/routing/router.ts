@@ -1,7 +1,9 @@
 import * as express from "express";
+
 import * as path from "path";
 import * as fs from "fs";
 import * as generateDOCX from "generate-docx";
+import { PatientCard } from "../../client/hospital/scripts/types";
 
 export const router = express.Router();
 
