@@ -28,7 +28,7 @@ app.post("/hospital-generate", (request, response) => {
       filePath: path.join(__dirname, "templates/hospital.docx")
     }
   };
-  generateDOCX(options, (error, buf) => {
+  generateDOCX(options).then(buf => {
     const pathToFile = path.join(__dirname, "outputs/hospital.docx");
     fs.writeFile(pathToFile, buf, err => {
       if (!err) {
