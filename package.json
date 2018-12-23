@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "This app is patient card creation tool",
   "main": "index.js",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "server": "node server/index.js",
     "start": "webpack --watch --mode=development",
