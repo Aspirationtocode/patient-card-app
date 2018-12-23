@@ -14,8 +14,8 @@ app.use("/", router);
 
 app.use(express.static(`${__dirname}/../build`));
 
-const PORT = process.env.port || 3000;
+app.set("port", process.env.PORT || 3000);
 
-app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+app.listen(app.get("port"), () => {
+  console.log(`Server listening`);
 });
