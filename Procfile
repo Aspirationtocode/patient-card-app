@@ -1,1 +1,1 @@
-node -r ts-node/register server/index.ts
+npm run server
