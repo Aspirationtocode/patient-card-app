@@ -22,40 +22,26 @@ app.get("/", (request, response) => {
 });
 
 app.post("/hospital-generate", (request, response) => {
-  response.send("s");
   const options = {
     template: {
       data: request.body,
-      filePath: path.resolve(__dirname, "templates/hospital.docx")
+      filePath: path.join(__dirname, "templates/hospital.docx")
     }
   };
   generateDOCX(options, (error, buf) => {
-    if (error) {
-      console.log(error);
-    } else {
-      fs.writeFile(
-        path.resolve(__dirname, "outputs/hospital.docx"),
-        buf,
-        err => {
-          if (!err) {
-            fs.stat(path.resolve(__dirname, "outputs/hospital.docx"), err => {
-              if (err) {
-                console.log("error");
-              }
-              response.download(
-                path.resolve(__dirname, "outputs/hospital.docx"),
-                () => {
-                  fs.unlink(
-                    path.resolve(__dirname, "outputs/hospital.docx"),
-                    () => {}
-                  );
-                }
-              );
-            });
+    const pathToFile = path.join(__dirname, "outputs/hospital.docx");
+    fs.writeFile(pathToFile, buf, err => {
+      if (!err) {
+        fs.stat(pathToFile, err => {
+          if (err) {
+            console.log("error");
           }
-        }
-      );
-    }
+          response.sendFile(pathToFile, () => {
+            fs.unlink(pathToFile, () => {});
+          });
+        });
+      }
+    });
   });
 });
 
