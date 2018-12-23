@@ -50,7 +50,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Grid container spacing={24}>
           {this.getTextField("number", "№ Медицинской карты", "number")}
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <DatePicker
               variant="outlined"
               fullWidth
@@ -59,7 +59,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
               value={receiptDate}
             />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <DatePicker
               variant="outlined"
               fullWidth
@@ -73,7 +73,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
           {this.getTextField("attendingDoctor", "Лечащий врач")}
           {this.getTextField("intolerance", "Непереносимость")}
           {this.getTextField("fullName", "ФИО")}
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Select
               variant="outlined"
               fullWidth
@@ -90,7 +90,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
               })}
             </Select>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <Select
               fullWidth
               onChange={this.handleTransportationTypeChange}
@@ -107,7 +107,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
             </Select>
           </Grid>
           {this.getTextField("phoneNumber", "Номер телефона")}
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <DatePicker
               variant="outlined"
               fullWidth
@@ -152,7 +152,7 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
     type: "number" | "text" = "text"
   ) {
     return (
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <TextField
           variant="outlined"
           onChange={this.handleChange(field)}
@@ -219,14 +219,14 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
       responseType: "blob",
       data
     }).then(response => {
-      var downloadUrl: any = (window.URL as any).createObjectURL(
+      const downloadUrl: any = (window.URL as any).createObjectURL(
         response.data,
         {
           type: "application/msword"
         }
       );
 
-      var a: any = document.createElement("a");
+      const a: any = document.createElement("a");
       a.style.display = "none";
 
       if (typeof a.download === "undefined") {
