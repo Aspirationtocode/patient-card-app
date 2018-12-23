@@ -219,11 +219,14 @@ export class PatientCardForm extends React.Component<{}, PatientCardFormState> {
       responseType: "blob",
       data
     }).then(response => {
-      var downloadUrl = window.URL.createObjectURL(response.data, {
-        type: "application/msword"
-      });
+      var downloadUrl: any = (window.URL as any).createObjectURL(
+        response.data,
+        {
+          type: "application/msword"
+        }
+      );
 
-      var a = document.createElement("a");
+      var a: any = document.createElement("a");
       a.style.display = "none";
 
       if (typeof a.download === "undefined") {
