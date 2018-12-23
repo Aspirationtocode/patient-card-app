@@ -1,7 +1,8 @@
-import * as express from "express";
-import * as bodyParser from "body-parser";
-import { router } from "./routing/router";
+const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
+
+const router = require("./routing/router");
 
 app.use(bodyParser.json());
 app.use(

@@ -1,11 +1,9 @@
-import * as express from "express";
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+const generateDOCX = require("generate-docx");
 
-import * as path from "path";
-import * as fs from "fs";
-import * as generateDOCX from "generate-docx";
-import { PatientCard } from "../../client/hospital/scripts/types";
-
-export const router = express.Router();
+const router = express.Router();
 
 router.get("/", (request, response) => {
   response.sendFile(path.resolve(__dirname, "../../build/hospital.html"));
@@ -47,3 +45,4 @@ router.post("/hospital-generate", (request, response) => {
     }
   });
 });
+module.exports = router;
