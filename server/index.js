@@ -30,18 +30,10 @@ app.post("/hospital-generate", (request, response) => {
   };
   generateDOCX(options).then(buf => {
     const pathToFile = path.join(__dirname, "outputs/hospital.docx");
-    response.send("ss");
     fs.writeFile(pathToFile, buf, err => {
-      if (!err) {
-        fs.stat(pathToFile, err => {
-          if (err) {
-            console.log("error");
-          }
-          response.download(pathToFile, () => {
-            fs.unlink(pathToFile, () => {});
-          });
-        });
-      }
+      response.download(pathToFile, () => {
+        fs.unlink(pathToFile, () => {});
+      });
     });
   });
 });
