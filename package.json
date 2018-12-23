@@ -8,7 +8,7 @@
     "node": "10.x"
   },
   "scripts": {
-    "server": "node -r ts-node/register server/index.ts",
+    "server": "ts-node server/index.ts",
     "start": "webpack --watch --mode=development",
     "build": "webpack --mode=production",
     "watch-server": "nodemon -r ts-node/register server/index.ts",
